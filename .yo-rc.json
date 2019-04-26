@@ -1,0 +1,35 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.daniel.todo"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "todo",
+        "packageName": "com.daniel.todo",
+        "packageFolder": "com/daniel/todo",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "h2Disk",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "MWUyMzY4YzE0ZDJiZTA5NWNhZTMyZmRlMzFhNGFiNjJhYTZhZTNjMDhlMWU3ZDRmNmEwMmNkNmM4YmJhNTg0OThkY2UzYTJhNTc2ZDc1ZmRkNWJiMjI4MDZiNjk0ZDE2MWJjNGY4YTEyYWQ3ZDc2ZWJhYmRiNzJmODFlYzc4Y2Y=",
+        "clientFramework": "angularX",
+        "useSass": false,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": false
+    }
+}
