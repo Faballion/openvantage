@@ -18,7 +18,6 @@ import { TodoHomeModule } from './home/home.module';
 import { TodoAccountModule } from './account/account.module';
 import { TodoEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
-import { MaterialModule } from './core/material.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 
@@ -37,8 +36,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         TodoAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         TodoEntityModule,
-        TodoAppRoutingModule,
-        MaterialModule
+        TodoAppRoutingModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
     providers: [

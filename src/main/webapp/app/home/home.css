@@ -1,23 +1,26 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-
-.hipster {
-    display: inline-block;
-    width: 347px;
-    height: 497px;
-    background: url('../../content/images/jhipster_family_member_2.svg') no-repeat center top;
-    background-size: contain;
+.banner {
+    text-align: center;
+    background-image: url('../../content/images/banner.jpg');
+    padding-top: 60px;
+    padding-bottom: 20px;
 }
 
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-    only screen and (-moz-min-device-pixel-ratio: 2),
-    only screen and (-o-min-device-pixel-ratio: 2/1),
-    only screen and (min-resolution: 192dpi),
-    only screen and (min-resolution: 2dppx) {
-    .hipster {
-        background: url('../../content/images/jhipster_family_member_2.svg') no-repeat center top;
-        background-size: contain;
-    }
+.banner h1 {
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+.banner button {
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.tasks-container {
+    margin: 0 auto;
+    width: 80%;
 }
