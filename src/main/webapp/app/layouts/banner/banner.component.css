@@ -1,0 +1,18 @@
+.banner {
+    text-align: center;
+    background-image: url('../../../content/images/banner.jpg');
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+
+.banner h1 {
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+.banner button {
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    text-align: center;
+}

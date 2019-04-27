@@ -20,6 +20,7 @@ import { TodoEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { BannerComponent } from './layouts/banner/banner.component';
 
 @NgModule({
     imports: [
@@ -38,7 +39,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         TodoEntityModule,
         TodoAppRoutingModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, BannerComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
