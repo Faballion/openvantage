@@ -7,7 +7,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -31,7 +30,7 @@ public class Task implements Serializable {
     private String title;
 
     @Column(name = "description")
-    private Instant description;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
@@ -40,8 +39,8 @@ public class Task implements Serializable {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
-    @Column(name = "jhi_complete")
-    private Boolean complete;
+    @Column(name = "completed")
+    private Boolean completed;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -65,16 +64,16 @@ public class Task implements Serializable {
         this.title = title;
     }
 
-    public Instant getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public Task description(Instant description) {
+    public Task description(String description) {
         this.description = description;
         return this;
     }
 
-    public void setDescription(Instant description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -104,17 +103,17 @@ public class Task implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public Boolean isComplete() {
-        return complete;
+    public Boolean isCompleted() {
+        return completed;
     }
 
-    public Task complete(Boolean complete) {
-        this.complete = complete;
+    public Task completed(Boolean completed) {
+        this.completed = completed;
         return this;
     }
 
-    public void setComplete(Boolean complete) {
-        this.complete = complete;
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -146,7 +145,7 @@ public class Task implements Serializable {
             ", description='" + getDescription() + "'" +
             ", category='" + getCategory() + "'" +
             ", dueDate='" + getDueDate() + "'" +
-            ", complete='" + isComplete() + "'" +
+            ", completed='" + isCompleted() + "'" +
             "}";
     }
 }

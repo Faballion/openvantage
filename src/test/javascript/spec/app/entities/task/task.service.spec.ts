@@ -5,7 +5,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { TaskService } from 'app/entities/task/task.service';
 import { ITask, Task, Category } from 'app/shared/model/task.model';
 
@@ -25,14 +25,13 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Task(0, 'AAAAAAA', currentDate, Category.Home, currentDate, false);
+            elemDefault = new Task(0, 'AAAAAAA', 'AAAAAAA', Category.Home, currentDate, false);
         });
 
         describe('Service methods', async () => {
             it('should find an element', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        description: currentDate.format(DATE_TIME_FORMAT),
                         dueDate: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
@@ -50,14 +49,12 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         id: 0,
-                        description: currentDate.format(DATE_TIME_FORMAT),
                         dueDate: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
-                        description: currentDate,
                         dueDate: currentDate
                     },
                     returnedFromService
@@ -74,17 +71,16 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         title: 'BBBBBB',
-                        description: currentDate.format(DATE_TIME_FORMAT),
+                        description: 'BBBBBB',
                         category: 'BBBBBB',
                         dueDate: currentDate.format(DATE_FORMAT),
-                        complete: true
+                        completed: true
                     },
                     elemDefault
                 );
 
                 const expected = Object.assign(
                     {
-                        description: currentDate,
                         dueDate: currentDate
                     },
                     returnedFromService
@@ -101,16 +97,15 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         title: 'BBBBBB',
-                        description: currentDate.format(DATE_TIME_FORMAT),
+                        description: 'BBBBBB',
                         category: 'BBBBBB',
                         dueDate: currentDate.format(DATE_FORMAT),
-                        complete: true
+                        completed: true
                     },
                     elemDefault
                 );
                 const expected = Object.assign(
                     {
-                        description: currentDate,
                         dueDate: currentDate
                     },
                     returnedFromService

@@ -9,21 +9,21 @@ export const enum Category {
 export interface ITask {
     id?: number;
     title?: string;
-    description?: Moment;
+    description?: string;
     category?: Category;
     dueDate?: Moment;
-    complete?: boolean;
+    completed?: boolean;
 }
 
 export class Task implements ITask {
     constructor(
         public id?: number,
         public title?: string,
-        public description?: Moment,
+        public description?: string,
         public category?: Category,
         public dueDate?: Moment,
-        public complete?: boolean
+        public completed?: boolean
     ) {
-        this.complete = this.complete || false;
+        this.completed = this.completed || false;
     }
 }

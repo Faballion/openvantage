@@ -7,7 +7,7 @@
         },
         {
             "fieldName": "description",
-            "fieldType": "Instant"
+            "fieldType": "String"
         },
         {
             "fieldName": "category",
@@ -19,7 +19,7 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "complete",
+            "fieldName": "completed",
             "fieldType": "Boolean"
         }
     ],

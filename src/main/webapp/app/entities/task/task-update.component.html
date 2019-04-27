@@ -16,10 +16,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
-                    <div class="d-flex">
-                        <input id="field_description" type="datetime-local" class="form-control" name="description" [(ngModel)]="description" placeholder="YYYY-MM-DD HH:mm"
-                        />
-                    </div>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="task.description" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_category">Category</label>
@@ -40,9 +38,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_complete">Complete</label>
-                    <input type="checkbox" class="form-control" name="complete" id="field_complete"
-                        [(ngModel)]="task.complete" />
+                    <label class="form-control-label" for="field_completed">Completed</label>
+                    <input type="checkbox" class="form-control" name="completed" id="field_completed"
+                        [(ngModel)]="task.completed" />
                 </div>
 
             </div>

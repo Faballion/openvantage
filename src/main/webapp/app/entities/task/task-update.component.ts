@@ -4,7 +4,6 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { ITask } from 'app/shared/model/task.model';
 import { TaskService } from './task.service';
 
@@ -15,7 +14,6 @@ import { TaskService } from './task.service';
 export class TaskUpdateComponent implements OnInit {
     task: ITask;
     isSaving: boolean;
-    description: string;
     dueDateDp: any;
 
     constructor(protected taskService: TaskService, protected activatedRoute: ActivatedRoute) {}
@@ -24,7 +22,6 @@ export class TaskUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ task }) => {
             this.task = task;
-            this.description = this.task.description != null ? this.task.description.format(DATE_TIME_FORMAT) : null;
         });
     }
 
@@ -34,7 +31,6 @@ export class TaskUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.task.description = this.description != null ? moment(this.description, DATE_TIME_FORMAT) : null;
         if (this.task.id !== undefined) {
             this.subscribeToSaveResponse(this.taskService.update(this.task));
         } else {

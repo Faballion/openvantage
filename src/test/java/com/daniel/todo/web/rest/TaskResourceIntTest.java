@@ -23,9 +23,7 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.time.Instant;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -48,8 +46,8 @@ public class TaskResourceIntTest {
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DESCRIPTION = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DESCRIPTION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final Category DEFAULT_CATEGORY = Category.Home;
     private static final Category UPDATED_CATEGORY = Category.Work;
@@ -57,8 +55,8 @@ public class TaskResourceIntTest {
     private static final LocalDate DEFAULT_DUE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DUE_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Boolean DEFAULT_COMPLETE = false;
-    private static final Boolean UPDATED_COMPLETE = true;
+    private static final Boolean DEFAULT_COMPLETED = false;
+    private static final Boolean UPDATED_COMPLETED = true;
 
     @Autowired
     private TaskRepository taskRepository;
@@ -106,7 +104,7 @@ public class TaskResourceIntTest {
             .description(DEFAULT_DESCRIPTION)
             .category(DEFAULT_CATEGORY)
             .dueDate(DEFAULT_DUE_DATE)
-            .complete(DEFAULT_COMPLETE);
+            .completed(DEFAULT_COMPLETED);
         return task;
     }
 
@@ -134,7 +132,7 @@ public class TaskResourceIntTest {
         assertThat(testTask.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTask.getCategory()).isEqualTo(DEFAULT_CATEGORY);
         assertThat(testTask.getDueDate()).isEqualTo(DEFAULT_DUE_DATE);
-        assertThat(testTask.isComplete()).isEqualTo(DEFAULT_COMPLETE);
+        assertThat(testTask.isCompleted()).isEqualTo(DEFAULT_COMPLETED);
     }
 
     @Test
@@ -171,7 +169,7 @@ public class TaskResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
             .andExpect(jsonPath("$.[*].dueDate").value(hasItem(DEFAULT_DUE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].complete").value(hasItem(DEFAULT_COMPLETE.booleanValue())));
+            .andExpect(jsonPath("$.[*].completed").value(hasItem(DEFAULT_COMPLETED.booleanValue())));
     }
     
     @Test
@@ -189,7 +187,7 @@ public class TaskResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
             .andExpect(jsonPath("$.dueDate").value(DEFAULT_DUE_DATE.toString()))
-            .andExpect(jsonPath("$.complete").value(DEFAULT_COMPLETE.booleanValue()));
+            .andExpect(jsonPath("$.completed").value(DEFAULT_COMPLETED.booleanValue()));
     }
 
     @Test
@@ -217,7 +215,7 @@ public class TaskResourceIntTest {
             .description(UPDATED_DESCRIPTION)
             .category(UPDATED_CATEGORY)
             .dueDate(UPDATED_DUE_DATE)
-            .complete(UPDATED_COMPLETE);
+            .completed(UPDATED_COMPLETED);
 
         restTaskMockMvc.perform(put("/api/tasks")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -232,7 +230,7 @@ public class TaskResourceIntTest {
         assertThat(testTask.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTask.getCategory()).isEqualTo(UPDATED_CATEGORY);
         assertThat(testTask.getDueDate()).isEqualTo(UPDATED_DUE_DATE);
-        assertThat(testTask.isComplete()).isEqualTo(UPDATED_COMPLETE);
+        assertThat(testTask.isCompleted()).isEqualTo(UPDATED_COMPLETED);
     }
 
     @Test

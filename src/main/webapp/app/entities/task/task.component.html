@@ -19,7 +19,7 @@
             <th jhiSortBy="description"><span>Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="category"><span>Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="dueDate"><span>Due Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="complete"><span>Complete</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="completed"><span>Completed</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -27,10 +27,10 @@
             <tr *ngFor="let task of tasks ;trackBy: trackId">
                 <td><a [routerLink]="['/task', task.id, 'view' ]">{{task.id}}</a></td>
                 <td>{{task.title}}</td>
-                <td>{{task.description | date:'medium'}}</td>
+                <td>{{task.description}}</td>
                 <td>{{task.category}}</td>
                 <td>{{task.dueDate | date:'mediumDate'}}</td>
-                <td>{{task.complete}}</td>
+                <td>{{task.completed}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

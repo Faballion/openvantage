@@ -51,7 +51,6 @@ export class TaskService {
 
     protected convertDateFromClient(task: ITask): ITask {
         const copy: ITask = Object.assign({}, task, {
-            description: task.description != null && task.description.isValid() ? task.description.toJSON() : null,
             dueDate: task.dueDate != null && task.dueDate.isValid() ? task.dueDate.format(DATE_FORMAT) : null
         });
         return copy;
@@ -59,7 +58,6 @@ export class TaskService {
 
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
-            res.body.description = res.body.description != null ? moment(res.body.description) : null;
             res.body.dueDate = res.body.dueDate != null ? moment(res.body.dueDate) : null;
         }
         return res;
@@ -68,7 +66,6 @@ export class TaskService {
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         if (res.body) {
             res.body.forEach((task: ITask) => {
-                task.description = task.description != null ? moment(task.description) : null;
                 task.dueDate = task.dueDate != null ? moment(task.dueDate) : null;
             });
         }
