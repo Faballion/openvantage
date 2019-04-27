@@ -1,0 +1,25 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+}
+
+.title-column {
+    width: 325px;
+}
+
+.description {
+    color: grey;
+    font-size: 11px;
+}
+
+tr {
+    transition: 0.2s linear;
+}
+
+tr:hover {
+    background-color: #eeeeee;
+}
