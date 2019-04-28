@@ -41,3 +41,12 @@ tr:hover {
 .complete-btn:active .check-icon {
     display: block;
 }
+
+.category-container {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 30px;
+    color: white;
+}

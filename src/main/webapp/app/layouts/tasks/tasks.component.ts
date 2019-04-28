@@ -32,7 +32,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     }
 
     loadTableData() {
-        this.taskService.query().subscribe(
+        this.taskService.query({ sort: ['id', 'desc'] }).subscribe(
             (res: HttpResponse<ITask[]>) => {
                 console.log(res.body);
                 this.dataSource = new MatTableDataSource(res.body);
@@ -52,6 +52,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
     updateTask(id: number) {
         this.bottomSheet.open(TaskDetailsComponent, {
+            // tslint:disable-next-line: object-literal-shorthand
             data: { id: id }
         });
     }

@@ -13,7 +13,7 @@
                     <button mat-icon-button matTooltip="Complete Task" matTooltipPosition="left"
                         (click)="completeTask()" class="complete-btn">
                         <mat-icon class="radio-icon">radio_button_unchecked</mat-icon>
-                        <mat-icon color="primary" class="check-icon">check</mat-icon>
+                        <mat-icon class="check-icon">check</mat-icon>
                     </button>
                 </td>
             </ng-container>
@@ -31,7 +31,14 @@
             <!-- Category Column -->
             <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-                <td mat-cell *matCellDef="let row"> {{row.category}} </td>
+                <td mat-cell *matCellDef="let row">
+                    <span *ngIf="row.category === 'Home'" class="category-container"
+                        style="background-color:cornflowerblue">{{row.category}}</span>
+                    <span *ngIf="row.category === 'Work'" class="category-container"
+                        style="background-color:goldenrod">{{row.category}}</span>
+                    <span *ngIf="row.category === 'Personal'" class="category-container"
+                        style="background-color:mediumseagreen">{{row.category}}</span>
+                </td>
             </ng-container>
 
             <!-- Due Date Column -->
