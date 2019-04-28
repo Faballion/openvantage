@@ -5,6 +5,7 @@ import { ITask } from 'app/shared/model/task.model';
 import { TaskService } from 'app/entities/task';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { JhiEventManager } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-task-details',
@@ -19,7 +20,8 @@ export class TaskDetailsComponent implements OnInit {
         private bottomSheetRef: MatBottomSheetRef<TaskDetailsComponent>,
         protected taskService: TaskService,
         private fb: FormBuilder,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        protected eventManager: JhiEventManager
     ) {}
 
     ngOnInit() {
@@ -42,7 +44,7 @@ export class TaskDetailsComponent implements OnInit {
         console.log(this.taskDetails);
         this.taskService.create(this.taskDetails).subscribe(
             (res: HttpResponse<ITask>) => {
-                console.log(res.body);
+                this.eventManager.broadcast({ name: 'taskListModification' });
                 this.bottomSheetRef.dismiss();
             },
             (res: HttpErrorResponse) => console.log(res.message)
