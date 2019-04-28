@@ -7,6 +7,14 @@ table {
     width: 100%;
 }
 
+tr {
+    transition: 0.2s linear;
+}
+
+tr:hover {
+    background-color: #eeeeee;
+}
+
 .title-column {
     width: 325px;
 }
@@ -16,10 +24,20 @@ table {
     font-size: 11px;
 }
 
-tr {
-    transition: 0.2s linear;
+.check-icon {
+    margin-left: 8px;
 }
 
-tr:hover {
-    background-color: #eeeeee;
+.complete-btn .check-icon {
+    display: none;
+}
+
+.complete-btn:hover .radio-icon,
+.complete-btn:active .radio-icon {
+    display: none;
+}
+
+.complete-btn:hover .check-icon,
+.complete-btn:active .check-icon {
+    display: block;
 }

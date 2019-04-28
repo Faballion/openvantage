@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatBottomSheet } from '@angular/material';
 import { TaskService } from 'app/entities/task';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -54,6 +54,10 @@ export class TasksComponent implements OnInit, OnDestroy {
         this.bottomSheet.open(TaskDetailsComponent, {
             data: { id: id }
         });
+    }
+
+    completeTask() {
+        console.log('complete');
     }
 
     applyFilter(filterValue: string) {
