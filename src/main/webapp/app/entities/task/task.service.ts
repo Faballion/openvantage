@@ -50,10 +50,7 @@ export class TaskService {
     }
 
     protected convertDateFromClient(task: ITask): ITask {
-        const copy: ITask = Object.assign({}, task, {
-            dueDate: task.dueDate != null && task.dueDate.isValid() ? task.dueDate.format(DATE_FORMAT) : null
-        });
-        return copy;
+        return task;
     }
 
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {

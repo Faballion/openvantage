@@ -23,6 +23,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
 import { BannerComponent } from './layouts/banner/banner.component';
 import { TasksComponent } from './layouts/tasks/tasks.component';
 import { TaskDetailsComponent } from './layouts/task-details/task-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -39,7 +40,9 @@ import { TaskDetailsComponent } from './layouts/task-details/task-details.compon
         TodoAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         TodoEntityModule,
-        TodoAppRoutingModule
+        TodoAppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         JhiMainComponent,
