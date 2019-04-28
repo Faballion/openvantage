@@ -10,7 +10,11 @@ import {
     MatSortModule,
     MatInputModule,
     MatTooltipModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatBottomSheetModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 
 @NgModule({
@@ -25,7 +29,11 @@ import {
         MatSortModule,
         MatInputModule,
         MatTooltipModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatBottomSheetModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -38,7 +46,11 @@ import {
         MatSortModule,
         MatInputModule,
         MatTooltipModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatBottomSheetModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     providers: []
 })

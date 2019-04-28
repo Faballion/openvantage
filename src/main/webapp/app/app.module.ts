@@ -22,6 +22,7 @@ import * as moment from 'moment';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { BannerComponent } from './layouts/banner/banner.component';
 import { TasksComponent } from './layouts/tasks/tasks.component';
+import { TaskDetailsComponent } from './layouts/task-details/task-details.component';
 
 @NgModule({
     imports: [
@@ -47,8 +48,10 @@ import { TasksComponent } from './layouts/tasks/tasks.component';
         PageRibbonComponent,
         FooterComponent,
         BannerComponent,
-        TasksComponent
+        TasksComponent,
+        TaskDetailsComponent
     ],
+    entryComponents: [TaskDetailsComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

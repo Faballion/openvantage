@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material';
+import { TaskDetailsComponent } from '../task-details/task-details.component';
 
 @Component({
     selector: 'jhi-banner',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit {
-    constructor() {}
+    constructor(private bottomSheet: MatBottomSheet) {}
 
     ngOnInit() {}
+
+    addTask() {
+        this.bottomSheet.open(TaskDetailsComponent);
+    }
 }
