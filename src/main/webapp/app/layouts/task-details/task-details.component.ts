@@ -34,7 +34,7 @@ export class TaskDetailsComponent implements OnInit {
                     description: [this.taskDetails.description],
                     category: [this.taskDetails.category],
                     dueDate: [this.taskDetails.dueDate],
-                    completed: true
+                    completed: false
                 });
             });
         } else {
@@ -44,7 +44,7 @@ export class TaskDetailsComponent implements OnInit {
                 description: [this.taskDetails.description],
                 category: [this.taskDetails.category],
                 dueDate: [this.taskDetails.dueDate],
-                completed: true
+                completed: false
             });
         }
     }

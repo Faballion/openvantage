@@ -57,8 +57,20 @@ export class TasksComponent implements OnInit, OnDestroy {
         });
     }
 
-    completeTask() {
-        console.log('complete');
+    completeTask(id: number) {
+        this.taskService.find(id).subscribe((res: HttpResponse<ITask>) => {
+            this.updateCompleted(res.body);
+        });
+    }
+
+    updateCompleted(task: ITask) {
+        task.completed = true;
+        this.taskService.update(task).subscribe(
+            (res: HttpResponse<ITask>) => {
+                this.eventManager.broadcast({ name: 'taskListModification' });
+            },
+            (res: HttpErrorResponse) => console.log(res.message)
+        );
     }
 
     applyFilter(filterValue: string) {

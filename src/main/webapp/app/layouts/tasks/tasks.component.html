@@ -6,12 +6,12 @@
     <div class="mat-elevation-z3" *ngIf="dataSource.data.length">
         <table mat-table [dataSource]="dataSource" matSort>
 
-            <!-- ID Column -->
+            <!-- Completed Column -->
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let row">
                     <button mat-icon-button matTooltip="Complete Task" matTooltipPosition="left"
-                        (click)="completeTask()" class="complete-btn">
+                        (click)="completeTask(row.id)" class="complete-btn">
                         <mat-icon class="radio-icon">radio_button_unchecked</mat-icon>
                         <mat-icon class="check-icon">check</mat-icon>
                     </button>
