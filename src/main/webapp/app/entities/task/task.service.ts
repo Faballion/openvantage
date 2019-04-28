@@ -54,18 +54,10 @@ export class TaskService {
     }
 
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
-        if (res.body) {
-            res.body.dueDate = res.body.dueDate != null ? moment(res.body.dueDate) : null;
-        }
         return res;
     }
 
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
-        if (res.body) {
-            res.body.forEach((task: ITask) => {
-                task.dueDate = task.dueDate != null ? moment(task.dueDate) : null;
-            });
-        }
         return res;
     }
 }
