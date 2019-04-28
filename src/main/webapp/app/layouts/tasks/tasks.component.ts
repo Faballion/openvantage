@@ -51,7 +51,6 @@ export class TasksComponent implements OnInit, OnDestroy {
     }
 
     updateTask(id: number) {
-        console.log('id is: ' + id);
         this.bottomSheet.open(TaskDetailsComponent, {
             data: { id: id }
         });

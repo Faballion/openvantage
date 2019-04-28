@@ -1,4 +1,15 @@
-<h1>Task</h1>
+<h1>
+    <span *ngIf="data.id">Edit</span>
+    <span *ngIf="!data.id">Add</span>
+    Task
+</h1>
+
+<div *ngIf="data.id" class="delete-container">
+    <button mat-icon-button matTooltip="Delete Task" (click)="deleteTask()">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>
+
 
 <form [formGroup]="taskDetailsForm" (ngSubmit)="submitForm()" *ngIf="taskDetailsForm">
     <mat-form-field class="full-width">
@@ -29,5 +40,8 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <button mat-flat-button type="submit" color="primary" class="submit-btn">Add</button>
+    <button mat-flat-button type="submit" color="primary" class="submit-btn">
+        <span *ngIf="data.id">Update</span>
+        <span *ngIf="!data.id">Add</span>
+    </button>
 </form>

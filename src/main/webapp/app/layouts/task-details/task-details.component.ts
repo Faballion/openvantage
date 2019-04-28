@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ITask } from 'app/shared/model/task.model';
 import { TaskService } from 'app/entities/task';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { JhiEventManager } from 'ng-jhipster';
 
 @Component({
@@ -20,7 +19,6 @@ export class TaskDetailsComponent implements OnInit {
         private bottomSheetRef: MatBottomSheetRef<TaskDetailsComponent>,
         protected taskService: TaskService,
         private fb: FormBuilder,
-        private datePipe: DatePipe,
         protected eventManager: JhiEventManager,
         @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
     ) {}
@@ -55,9 +53,9 @@ export class TaskDetailsComponent implements OnInit {
         this.taskDetails.title = this.taskDetailsForm.value['title'];
         this.taskDetails.description = this.taskDetailsForm.value['description'];
         this.taskDetails.category = this.taskDetailsForm.value['category'];
-        // this.taskDetails.dueDate = this.datePipe.transform(this.taskDetailsForm.value['dueDate'], 'yyyy-MM-DD');
         this.taskDetails.dueDate = this.taskDetailsForm.value['dueDate'];
         this.taskDetails.completed = this.taskDetailsForm.value['completed'];
+
         console.log(this.taskDetails);
         if (this.data.id) {
             // Edit task
@@ -79,5 +77,12 @@ export class TaskDetailsComponent implements OnInit {
                 (res: HttpErrorResponse) => console.log(res.message)
             );
         }
+    }
+
+    deleteTask() {
+        this.taskService.delete(this.data.id).subscribe((res: HttpResponse<ITask>) => {
+            this.eventManager.broadcast({ name: 'taskListModification' });
+            this.bottomSheetRef.dismiss();
+        });
     }
 }
