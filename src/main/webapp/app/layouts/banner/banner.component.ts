@@ -13,6 +13,8 @@ export class BannerComponent implements OnInit {
     ngOnInit() {}
 
     addTask() {
-        this.bottomSheet.open(TaskDetailsComponent);
+        this.bottomSheet.open(TaskDetailsComponent, {
+            data: { id: null }
+        });
     }
 }

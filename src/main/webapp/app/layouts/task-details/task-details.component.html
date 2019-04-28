@@ -1,8 +1,8 @@
 <h1>Task</h1>
 
-<form [formGroup]="taskDetailsForm" (ngSubmit)="submitForm()">
+<form [formGroup]="taskDetailsForm" (ngSubmit)="submitForm()" *ngIf="taskDetailsForm">
     <mat-form-field class="full-width">
-        <input matInput placeholder="Title" formControlName="title" value="">
+        <input matInput placeholder="Title" formControlName="title" type="text">
     </mat-form-field>
     <br>
 

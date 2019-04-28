@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatBottomSheet } from '@angular/material';
 import { TaskService } from 'app/entities/task';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ITask } from 'app/shared/model/task.model';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
+import { TaskDetailsComponent } from '../task-details/task-details.component';
 
 @Component({
     selector: 'jhi-tasks',
@@ -19,7 +20,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(protected taskService: TaskService, protected eventManager: JhiEventManager) {}
+    constructor(protected taskService: TaskService, protected eventManager: JhiEventManager, private bottomSheet: MatBottomSheet) {}
 
     ngOnInit() {
         this.loadTableData();
@@ -46,6 +47,13 @@ export class TasksComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('taskListModification', response => {
             console.log('CHANGE DETECTED!!!!');
             this.loadTableData();
+        });
+    }
+
+    updateTask(id: number) {
+        console.log('id is: ' + id);
+        this.bottomSheet.open(TaskDetailsComponent, {
+            data: { id: id }
         });
     }
 

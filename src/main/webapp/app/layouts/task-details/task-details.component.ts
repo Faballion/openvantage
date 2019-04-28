@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ITask } from 'app/shared/model/task.model';
 import { TaskService } from 'app/entities/task';
@@ -21,17 +21,34 @@ export class TaskDetailsComponent implements OnInit {
         protected taskService: TaskService,
         private fb: FormBuilder,
         private datePipe: DatePipe,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
     ) {}
 
     ngOnInit() {
-        this.taskDetailsForm = this.fb.group({
-            title: [this.taskDetails.title],
-            description: [this.taskDetails.description],
-            category: [this.taskDetails.category],
-            dueDate: [this.taskDetails.dueDate],
-            completed: true
-        });
+        if (this.data.id) {
+            // Edit task
+            this.taskService.find(this.data.id).subscribe((res: HttpResponse<ITask>) => {
+                console.log(res.body);
+                this.taskDetails = res.body;
+                this.taskDetailsForm = this.fb.group({
+                    title: [this.taskDetails.title],
+                    description: [this.taskDetails.description],
+                    category: [this.taskDetails.category],
+                    dueDate: [this.taskDetails.dueDate],
+                    completed: true
+                });
+            });
+        } else {
+            // Add task
+            this.taskDetailsForm = this.fb.group({
+                title: [this.taskDetails.title],
+                description: [this.taskDetails.description],
+                category: [this.taskDetails.category],
+                dueDate: [this.taskDetails.dueDate],
+                completed: true
+            });
+        }
     }
 
     submitForm() {
@@ -42,12 +59,25 @@ export class TaskDetailsComponent implements OnInit {
         this.taskDetails.dueDate = this.taskDetailsForm.value['dueDate'];
         this.taskDetails.completed = this.taskDetailsForm.value['completed'];
         console.log(this.taskDetails);
-        this.taskService.create(this.taskDetails).subscribe(
-            (res: HttpResponse<ITask>) => {
-                this.eventManager.broadcast({ name: 'taskListModification' });
-                this.bottomSheetRef.dismiss();
-            },
-            (res: HttpErrorResponse) => console.log(res.message)
-        );
+        if (this.data.id) {
+            // Edit task
+            this.taskDetails.id = this.data.id;
+            this.taskService.update(this.taskDetails).subscribe(
+                (res: HttpResponse<ITask>) => {
+                    this.eventManager.broadcast({ name: 'taskListModification' });
+                    this.bottomSheetRef.dismiss();
+                },
+                (res: HttpErrorResponse) => console.log(res.message)
+            );
+        } else {
+            // Add task
+            this.taskService.create(this.taskDetails).subscribe(
+                (res: HttpResponse<ITask>) => {
+                    this.eventManager.broadcast({ name: 'taskListModification' });
+                    this.bottomSheetRef.dismiss();
+                },
+                (res: HttpErrorResponse) => console.log(res.message)
+            );
+        }
     }
 }
