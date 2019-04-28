@@ -1,9 +1,9 @@
 <div class="container">
-    <mat-form-field>
+    <mat-form-field *ngIf="dataSource.data.length">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 
-    <div class="mat-elevation-z3">
+    <div class="mat-elevation-z3" *ngIf="dataSource.data.length">
         <table mat-table [dataSource]="dataSource" matSort>
 
             <!-- ID Column -->
@@ -65,4 +65,10 @@
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
+
+    <div class="no-records-container" *ngIf="!dataSource.data.length">
+        <h2>Looks like you're all caught up!</h2>
+        <mat-icon>sentiment_satisfied_alt</mat-icon>
+    </div>
+
 </div>

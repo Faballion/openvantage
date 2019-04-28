@@ -50,3 +50,13 @@ tr:hover {
     border-radius: 30px;
     color: white;
 }
+
+.no-records-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.no-records-container .mat-icon {
+    font-size: 110px;
+    width: 200px;
+}
