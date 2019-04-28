@@ -1,98 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-
-export interface Task {
-    id: string;
-    title?: string;
-    description?: string;
-    category?: string;
-    dueDate?: string;
-}
-
-const TITLES: string[] = [
-    'Maia',
-    'Asher',
-    'Olivia',
-    'Atticus',
-    'Amelia',
-    'Jack',
-    'Charlotte',
-    'Theodore',
-    'Isla',
-    'Oliver',
-    'Isabella',
-    'Jasper',
-    'Cora',
-    'Levi',
-    'Violet',
-    'Arthur',
-    'Mia',
-    'Thomas',
-    'Elizabeth'
-];
-const DESCRIPTIONS: string[] = [
-    '',
-    'Asher',
-    'Olivia',
-    'Atticus',
-    'Amelia',
-    'Jack',
-    'Charlotte',
-    'Theodore',
-    'Isla',
-    'Oliver',
-    'Isabella',
-    'Jasper',
-    'Cora',
-    'Levi',
-    'Violet',
-    'Arthur',
-    'Mia',
-    'Thomas',
-    'Elizabeth'
-];
-const CATEGORIES: string[] = [
-    '',
-    'Asher',
-    'Olivia',
-    'Atticus',
-    'Amelia',
-    'Jack',
-    'Charlotte',
-    'Theodore',
-    'Isla',
-    'Oliver',
-    'Isabella',
-    'Jasper',
-    'Cora',
-    'Levi',
-    'Violet',
-    'Arthur',
-    'Mia',
-    'Thomas',
-    'Elizabeth'
-];
-const DUEDATES: string[] = [
-    '',
-    'Asher',
-    'Olivia',
-    'Atticus',
-    'Amelia',
-    'Jack',
-    'Charlotte',
-    'Theodore',
-    'Isla',
-    'Oliver',
-    'Isabella',
-    'Jasper',
-    'Cora',
-    'Levi',
-    'Violet',
-    'Arthur',
-    'Mia',
-    'Thomas',
-    'Elizabeth'
-];
+import { TaskService } from 'app/entities/task';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { ITask } from 'app/shared/model/task.model';
 
 @Component({
     selector: 'jhi-tasks',
@@ -101,19 +11,27 @@ const DUEDATES: string[] = [
 })
 export class TasksComponent implements OnInit {
     displayedColumns: string[] = ['id', 'title', 'category', 'dueDate', 'edit'];
-    dataSource: MatTableDataSource<Task>;
+    dataSource: MatTableDataSource<ITask>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor() {
-        const tasks = Array.from({ length: TITLES.length - 1 }, (_, k) => createNewUser(k + 1));
-        this.dataSource = new MatTableDataSource(tasks);
-    }
+    constructor(protected taskService: TaskService) {}
 
     ngOnInit() {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.loadTableData();
+    }
+
+    loadTableData() {
+        this.taskService.query().subscribe(
+            (res: HttpResponse<ITask[]>) => {
+                console.log(res.body);
+                this.dataSource = new MatTableDataSource(res.body);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            },
+            (res: HttpErrorResponse) => console.log(res.message)
+        );
     }
 
     applyFilter(filterValue: string) {
@@ -122,14 +40,4 @@ export class TasksComponent implements OnInit {
             this.dataSource.paginator.firstPage();
         }
     }
-}
-
-function createNewUser(id: number): Task {
-    return {
-        id: id.toString(),
-        title: TITLES[id],
-        description: DESCRIPTIONS[id],
-        category: CATEGORIES[id],
-        dueDate: DUEDATES[id]
-    };
 }
