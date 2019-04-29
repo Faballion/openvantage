@@ -13,14 +13,16 @@
 
 <form [formGroup]="taskDetailsForm" (ngSubmit)="submitForm()" *ngIf="taskDetailsForm">
     <mat-form-field class="full-width">
-        <input matInput placeholder="Title" formControlName="title" type="text">
+        <input matInput placeholder="Title" #title maxlength="100" formControlName="title" type="text">
+        <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
     </mat-form-field>
     <br>
 
     <mat-form-field class="full-width">
         <mat-label>Description</mat-label>
-        <textarea formControlName="description" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"></textarea>
+        <textarea formControlName="description" matInput cdkTextareaAutosize #description
+            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" maxlength="255"></textarea>
+        <mat-hint align="end">{{description.value?.length || 0}}/255</mat-hint>
     </mat-form-field>
     <br>
 
