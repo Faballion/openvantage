@@ -1,9 +1,9 @@
 <div class="container">
-    <mat-form-field *ngIf="dataSource.data.length">
+    <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 
-    <div class="mat-elevation-z3" *ngIf="dataSource.data.length">
+    <div class="mat-elevation-z3">
         <table mat-table [dataSource]="dataSource" matSort>
 
             <!-- Completed Column -->

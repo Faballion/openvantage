@@ -1,9 +1,11 @@
 package com.daniel.todo.web.rest;
 import com.daniel.todo.domain.Task;
-import com.daniel.todo.repository.TaskRepository;
+import com.daniel.todo.service.TaskService;
 import com.daniel.todo.web.rest.errors.BadRequestAlertException;
 import com.daniel.todo.web.rest.util.HeaderUtil;
 import com.daniel.todo.web.rest.util.PaginationUtil;
+import com.daniel.todo.service.dto.TaskCriteria;
+import com.daniel.todo.service.TaskQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +33,13 @@ public class TaskResource {
 
     private static final String ENTITY_NAME = "task";
 
-    private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
-    public TaskResource(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    private final TaskQueryService taskQueryService;
+
+    public TaskResource(TaskService taskService, TaskQueryService taskQueryService) {
+        this.taskService = taskService;
+        this.taskQueryService = taskQueryService;
     }
 
     /**
@@ -50,7 +55,7 @@ public class TaskResource {
         if (task.getId() != null) {
             throw new BadRequestAlertException("A new task cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Task result = taskRepository.save(task);
+        Task result = taskService.save(task);
         return ResponseEntity.created(new URI("/api/tasks/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -71,7 +76,7 @@ public class TaskResource {
         if (task.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Task result = taskRepository.save(task);
+        Task result = taskService.save(task);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, task.getId().toString()))
             .body(result);
@@ -81,14 +86,27 @@ public class TaskResource {
      * GET  /tasks : get all the tasks.
      *
      * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of tasks in body
      */
     @GetMapping("/tasks")
-    public ResponseEntity<List<Task>> getAllTasks(Pageable pageable) {
-        log.debug("REST request to get a page of Tasks");
-        Page<Task> page = taskRepository.findAll(pageable);
+    public ResponseEntity<List<Task>> getAllTasks(TaskCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Tasks by criteria: {}", criteria);
+        Page<Task> page = taskQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tasks");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * GET  /tasks/count : count all the tasks.
+    *
+    * @param criteria the criterias which the requested entities should match
+    * @return the ResponseEntity with status 200 (OK) and the count in body
+    */
+    @GetMapping("/tasks/count")
+    public ResponseEntity<Long> countTasks(TaskCriteria criteria) {
+        log.debug("REST request to count Tasks by criteria: {}", criteria);
+        return ResponseEntity.ok().body(taskQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -100,7 +118,7 @@ public class TaskResource {
     @GetMapping("/tasks/{id}")
     public ResponseEntity<Task> getTask(@PathVariable Long id) {
         log.debug("REST request to get Task : {}", id);
-        Optional<Task> task = taskRepository.findById(id);
+        Optional<Task> task = taskService.findOne(id);
         return ResponseUtil.wrapOrNotFound(task);
     }
 
@@ -113,7 +131,7 @@ public class TaskResource {
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         log.debug("REST request to delete Task : {}", id);
-        taskRepository.deleteById(id);
+        taskService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

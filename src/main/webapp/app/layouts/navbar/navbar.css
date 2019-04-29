@@ -21,7 +21,11 @@ Navbar
 Logo styles
 ========================================================================== */
 
-.navbar-brand.logo {
+a {
+    text-decoration: none;
+}
+
+.navbar-brand .logo {
     padding: 5px 15px;
 }
 

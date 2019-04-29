@@ -32,7 +32,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     }
 
     loadTableData() {
-        this.taskService.query({ sort: ['id', 'desc'] }).subscribe(
+        this.taskService.query().subscribe(
             (res: HttpResponse<ITask[]>) => {
                 console.log(res.body);
                 this.dataSource = new MatTableDataSource(res.body);
@@ -58,12 +58,15 @@ export class TasksComponent implements OnInit, OnDestroy {
     }
 
     completeTask(id: number) {
-        this.taskService.find(id).subscribe((res: HttpResponse<ITask>) => {
-            this.updateCompleted(res.body);
+        this.taskService.delete(id).subscribe((res: HttpResponse<ITask>) => {
+            this.eventManager.broadcast({ name: 'taskListModification' });
         });
+        /*this.taskService.find(id).subscribe((res: HttpResponse<ITask>) => {
+            this.updateCompleted(res.body);
+        });*/
     }
 
-    updateCompleted(task: ITask) {
+    /*updateCompleted(task: ITask) {
         task.completed = true;
         this.taskService.update(task).subscribe(
             (res: HttpResponse<ITask>) => {
@@ -71,7 +74,7 @@ export class TasksComponent implements OnInit, OnDestroy {
             },
             (res: HttpErrorResponse) => console.log(res.message)
         );
-    }
+    }*/
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
