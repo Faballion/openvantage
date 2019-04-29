@@ -22,3 +22,11 @@ h1 {
     right: 15px;
     top: 15px;
 }
+
+.loading-container {
+    height: 242px;
+}
+
+.loading-spinner {
+    margin: auto;
+}

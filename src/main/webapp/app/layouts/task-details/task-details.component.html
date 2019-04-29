@@ -10,7 +10,9 @@
     </button>
 </div>
 
-
+<div class="loading-container" *ngIf="!taskDetailsForm">
+    <mat-spinner diameter="50" class="loading-spinner"></mat-spinner>
+</div>
 <form [formGroup]="taskDetailsForm" (ngSubmit)="submitForm()" *ngIf="taskDetailsForm">
     <mat-form-field class="full-width">
         <input matInput placeholder="Title" #title maxlength="100" formControlName="title" type="text">
